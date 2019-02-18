@@ -10,7 +10,9 @@ var message = continents.map(function (c) {
 var component = React.createElement(
   'p',
   null,
-  message
+  ' ',
+  message,
+  ' '
 ); // A simple JSX component
 
 ReactDOM.render(component, contentNode); // Render the component inside the content Node
