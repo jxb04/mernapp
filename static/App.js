@@ -55,19 +55,44 @@ var IssueRow = function (_React$Component2) {
     _createClass(IssueRow, [{
         key: 'render',
         value: function render() {
-            var borderedStyle = { border: "1px solid silver", padding: 4 };
+            var issue = this.props.issue;
             return React.createElement(
                 'tr',
                 null,
                 React.createElement(
                     'td',
-                    { style: borderedStyle },
-                    this.props.issue_id
+                    null,
+                    issue.id
                 ),
                 React.createElement(
                     'td',
-                    { style: borderedStyle },
-                    this.props.children
+                    null,
+                    issue.status
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.owner
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.created.toDateString()
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.effort
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.completionDate ? issue.completionDate.toDateString() : ''
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.title
                 )
             );
         }
@@ -88,41 +113,69 @@ var IssueTable = function (_React$Component3) {
     _createClass(IssueTable, [{
         key: 'render',
         value: function render() {
-            var borderedStyle = { border: "1px solid silver", padding: 6 };
+            var issueRows = this.props.issues.map(function (issue) {
+                return React.createElement(IssueRow, { key: issue.id, issue: issue });
+            });
             return React.createElement(
                 'table',
-                { style: { borderCollapse: "collapse" } },
+                { className: 'bordered-table' },
+                '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
                 React.createElement(
                     'thead',
                     null,
+                    '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
                     React.createElement(
                         'tr',
                         null,
+                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
                         React.createElement(
                             'th',
-                            { style: borderedStyle },
+                            null,
                             'Id'
                         ),
+                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
                         React.createElement(
                             'th',
-                            { style: borderedStyle },
+                            null,
+                            'Status'
+                        ),
+                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
+                        React.createElement(
+                            'th',
+                            null,
+                            'Owner'
+                        ),
+                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
+                        React.createElement(
+                            'th',
+                            null,
+                            'Created'
+                        ),
+                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
+                        React.createElement(
+                            'th',
+                            null,
+                            'Effort'
+                        ),
+                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
+                        React.createElement(
+                            'th',
+                            null,
+                            'Completion Date'
+                        ),
+                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0',
+                        React.createElement(
+                            'th',
+                            null,
                             'Title'
-                        )
+                        ),
+                        '\xA0\xA0\xA0\xA0\xA0\xA0'
                     )
                 ),
                 React.createElement(
                     'tbody',
                     null,
-                    React.createElement(
-                        IssueRow,
-                        { issue_id: 1 },
-                        'Error in console when clicking Add'
-                    ),
-                    React.createElement(
-                        IssueRow,
-                        { issue_id: 2 },
-                        'Missing bottom border on panel'
-                    )
+                    issueRows
                 )
             );
         }
@@ -176,7 +229,7 @@ var IssueList = function (_React$Component5) {
                 ),
                 React.createElement(IssueFilter, null),
                 React.createElement('hr', null),
-                React.createElement(IssueTable, null),
+                React.createElement(IssueTable, { issues: issues }),
                 React.createElement('hr', null),
                 React.createElement(IssueAdd, null)
             );
