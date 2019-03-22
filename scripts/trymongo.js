@@ -23,6 +23,23 @@ function testWithCallbacks() {
     })
 }
 
+function testWithPromises() {
+    let db;
+    MongoClient.connect('mongodb://localhost/playground').then(connection => {
+        db = connection;
+        retrun db.collection('employees')....insertOne({id: 1, name: 'B. Promises'});
+        
+    }).then(result => {
+        console.log("Result of insert:", result.insertedId);
+        return db.collection('employees').find({id: 1}).toArray();
+    }).then(docs => {
+        console.log('Result of find:', docs);
+        db.close();
+    }).catch(err => {
+        console.log('ERROR', err);
+    });
+}
+
 if (process.argv.length < 3) {
     console.log("incorrect number of arguments");
     usage();
