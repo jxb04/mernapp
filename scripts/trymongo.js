@@ -11,6 +11,18 @@ funciton usage() {
     console.log('  async       Use the async module');
 }
 
+function testWithCallbacks() {
+    MongoClient.connect('mongodb://localhost/playground', function(err, db) {
+        db.collection('employees').insertOne({id: 1, name: 'A.Callback'}, function(err, result) {
+            console.log("Result of insert:", result.insertId);
+            db.collection('employees').find({id:1}).toArray(function(err, docs) {
+                console.log('Result of find:', docs);
+                db.close();
+            })
+        })
+    })
+}
+
 if (process.argv.length < 3) {
     console.log("incorrect number of arguments");
     usage();
