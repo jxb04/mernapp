@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/jxb04/mernapp#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "co": "^4.6.0",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "mongodb": "^3.1.13"
   },
   "devDependencies": {
